@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">WUMF</string>
+    <string name="btStart">Start</string>
+    <string name="btCancel">Cancel</string>
+    <string name="btOneTime">One Time</string>
 </resources>
