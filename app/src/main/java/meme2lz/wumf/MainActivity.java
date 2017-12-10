@@ -14,18 +14,31 @@
 
 
 package meme2lz.wumf;
+
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
+
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
+    //    private static final String TAG = "MyActivity";
     private AlarmManagement alarm;
 
     @Override
@@ -39,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
     }
+
 
     public void startRepeatingTimer(View view) {
         Context context = this.getApplicationContext();
@@ -67,10 +81,50 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.activity_widget_alarm_manager, menu);
-//        return true;
-//    }
+    public void callPicker(View view) {
+
+    }
+
+
+    Calendar date;
+
+    public void showDateTimePicker(View view) {
+        final Calendar currentDate = Calendar.getInstance();
+        date = Calendar.getInstance();
+        final Context context = this.getApplicationContext();
+        new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                date.set(year, month, dayOfMonth);
+                new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        date.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        date.set(Calendar.MINUTE, minute);
+                        Toast.makeText(context, date.getTime().toString(), Toast.LENGTH_LONG).show();
+                    }
+                }, currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
+            }
+        },
+                date.get(Calendar.YEAR),
+                date.get(Calendar.MONTH),
+                date.get(Calendar.DAY_OF_MONTH))
+                .show();
+
+//        {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                date.set(year, monthOfYear, dayOfMonth);
+//                new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+//                    @Override
+//                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                        date.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//                        date.set(Calendar.MINUTE, minute);
+////                        Log.v(TAG, "The choosen one " + date.getTime());
+//                    }
+//                }, currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
+//            }
+//        }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE)).show();
+    }
 }
 
