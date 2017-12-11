@@ -8,9 +8,11 @@
         <!--<item name="colorPrimary">#6B0008</item>-->
         <item name="colorPrimary">#6b0008</item>
         <item name="colorPrimaryDark">#3F050D</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">#FF989E</item>
         <item name="android:windowBackground">@android:color/background_dark</item>
         <item name="android:colorBackground">?attr/colorPrimary</item>
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:textColorPrimaryInverse">#FFFFFF</item>
     </style>
 
 </resources>

@@ -3,4 +3,8 @@
     <string name="btStart">Start</string>
     <string name="btCancel">Cancel</string>
     <string name="btOneTime">One Time</string>
+    <string name="btQTest">QUICK TEST</string>
+    <string name="btSettings">SETTINGS</string>
+    <string name="btADD">ADD</string>
+    <string name="txAlarmList">List of set alarms</string>
 </resources>
