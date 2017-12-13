@@ -12,6 +12,8 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.Button;
+import android.content.ContentUris; import android.media.AudioManager;
+import android.media.MediaPlayer; import android.media.MediaPlayer.OnCompletionListener; import android.media.MediaPlayer.OnPreparedListener; import android.net.Uri;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -22,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
     static DatabaseHelper myDB;
     Calendar date;
     Button btSettings;
-    private AlarmManagement alarm;
+     AlarmManagement alarm;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -1,5 +1,6 @@
 package meme2lz.wumf;
 
+import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,6 +9,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.widget.Toast;
@@ -37,6 +40,15 @@ public class AlarmManagement extends BroadcastReceiver {
         msgStr.append(formatter.format(new Date()));
 
         Toast.makeText(context, msgStr, Toast.LENGTH_LONG).show();
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        try {
+            mediaPlayer.setDataSource("src//main//res//raw//bell.wav");
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 //Разблокируем поток.
         wl.release();

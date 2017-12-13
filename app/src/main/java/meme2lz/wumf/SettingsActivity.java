@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private AlarmManagement alarm;
+     AlarmManagement alarm;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
