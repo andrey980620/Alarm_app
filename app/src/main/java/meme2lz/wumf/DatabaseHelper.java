@@ -5,46 +5,129 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "alarmList.myDB";
-    public static final String TABLE_NAME = "alarmList_data";
+import java.util.ArrayList;
+import java.util.Calendar;
+
+public class DatabaseHelper {
+    public static final String DB_NAME = "alarmList_2.db";
+    private static final int DB_VERSION = 1;
+
+    public static final String TB_NAME = "alarmList_data_2";
     public static final String COL1 = "ID";
     public static final String COL2 = "ATTR_1";
+    public static final String COL3 = "ATTR_2";
 
-    public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+
+
+
+    private String[] allColumn = {COL1,COL2,COL3};
+
+    public static final String CREATE_QUERY = "CREATE TABLE " + TB_NAME + "( "
+            + COL1 + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COL2 + " TEXT NOT NULL, "
+            + COL3 + " INT);";
+
+    private SQLiteDatabase db;
+    private Context context;
+
+    private DBHandler dbHandler;
+
+    //Constructor for the class DBHelper
+    public DatabaseHelper(Context ctx) {
+        context = ctx;
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                " ATTR_1 TEXT)";
-        db.execSQL(createTable);
+    public DatabaseHelper open() throws android.database.SQLException{
+        dbHandler = new DBHandler(context);
+        db = dbHandler.getWritableDatabase();
+        return this;
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP IF TABLE EXISTS " + TABLE_NAME);
-        onCreate(db);
+    public void close(){
+        dbHandler.close();
     }
 
-    public boolean addData(String attr_1) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public SQLiteDatabase getDB(){return db;}
+
+
+
+    //This method gets called if you want to add a new note
+    public boolean addData(String newDate){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, attr_1);
-        long result = db.insert(TABLE_NAME, null, contentValues);
-        //if date as inserted incorrectly it will return -1
-        if (result == -1) {
+        contentValues.put(COL2, newDate);
+        contentValues.put(COL3, 1);
+
+        long insertId = db.insert(TB_NAME, null, contentValues);
+        Log.v("DB: "," inserted with id="+ insertId);
+        if (insertId == -1) {
             return false;
         } else {
             return true;
         }
     }
 
-    public Cursor getListContents() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        return data;
+//    //This method gets called if you want to edit the existing note
+//    public long updateNote(long idToUpdate, String title, String note, NoteModel.Category category){
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put(COL_TITLE, title);
+//        contentValues.put(COL_NOTE, note);
+//        contentValues.put(COL_CATEGORY, category.name() + "");
+//        contentValues.put(COL_DATE, Calendar.getInstance().getTimeInMillis()+ "");
+//
+//        return db.update(TB_NAME, contentValues, COL_ID + " = " + idToUpdate, null);
+//
+//    }
+
+    public long deleteAlarm(long idToDelete){
+        return db.delete(TB_NAME, COL1 + " = " + idToDelete, null);
+
+    }
+
+
+    //This method gets called in displaying the notes in the ListView
+    public ArrayList<AlarmModel> getAll(){
+        ArrayList<AlarmModel> arrayAlarms = new ArrayList<AlarmModel>();
+
+        //Grab all the information in our database for the notes in it
+        Cursor res = db.query(TB_NAME, allColumn, null, null, null, null, null);
+
+        //Loop through all of the rows (arraynotes) in our database and create new note objects from
+        //those rows and add them to our array list
+        for (res.moveToLast(); !res.isBeforeFirst(); res.moveToPrevious()){
+            AlarmModel alarmModel = cursorToAlarm(res);
+            arrayAlarms.add(alarmModel);
+        }
+
+        //Close our cursor (Required)
+        res.close();
+        return arrayAlarms;
+    }
+
+    private AlarmModel cursorToAlarm(Cursor res){
+        AlarmModel newAlarm = new AlarmModel(res.getLong(0), res.getString(1),res.getInt(2));
+        return newAlarm;
+    }
+
+
+    private static class DBHandler extends SQLiteOpenHelper{
+
+        public DBHandler(Context context) {
+            super(context, DB_NAME, null, DB_VERSION);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL(CREATE_QUERY);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXIST " + TB_NAME);
+            onCreate(db);
+        }
+
+
     }
 }

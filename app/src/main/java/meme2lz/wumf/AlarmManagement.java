@@ -51,6 +51,15 @@ public class AlarmManagement extends BroadcastReceiver {
         am.setRepeating(android.app.AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 5, pi);
     }
 
+    public void SetTimeAlarm(Context context, long millis) {
+        android.app.AlarmManager am = (android.app.AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmManagement.class);
+        intent.putExtra(ONE_TIME, Boolean.FALSE);//Задаем параметр интента
+        PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+        am.setRepeating(android.app.AlarmManager.RTC_WAKEUP, millis, 1500, pi);
+    }
+
     public void CancelAlarm(Context context) {
         Intent intent = new Intent(context, AlarmManagement.class);
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);

@@ -9,4 +9,5 @@
     <string name="txAlarmList">List of set alarms</string>
     <string name="toast_dbAdded">Successfully added to db: </string>
     <string name="toast_error">Sorry, something went wrong.</string>
+    <string name="btClearDB">CLEAR DB</string>
 </resources>

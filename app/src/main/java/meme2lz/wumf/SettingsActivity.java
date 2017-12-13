@@ -30,6 +30,15 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    public void startTimer(long millis) {
+        Context context = this.getApplicationContext();
+        if (alarm != null) {
+            alarm.SetTimeAlarm(context,millis);
+        } else {
+            Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void cancelRepeatingTimer(View view) {
         Context context = this.getApplicationContext();
         if (alarm != null) {
@@ -46,6 +55,10 @@ public class SettingsActivity extends AppCompatActivity {
         } else {
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void clearDatabase(View view){
+        MainActivity.myDB.getDB().execSQL("delete from "+ DatabaseHelper.TB_NAME);
     }
 
 }

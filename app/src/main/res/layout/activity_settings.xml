@@ -24,6 +24,20 @@
         android:layout_marginBottom="8dp" />
 
     <Button
+        android:id="@+id/btClearDB"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="117dp"
+        android:layout_height="50dp"
+        android:onClick="clearDatabase"
+        android:text="@string/btClearDB"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:background="@color/superLightBlue"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btQTest"
+        android:layout_marginBottom="8dp" />
+
+    <Button
         android:id="@+id/btCancel"
         android:layout_width="0dp"
         android:layout_height="48dp"

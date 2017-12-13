@@ -14,11 +14,12 @@ import android.widget.Toast;
 import android.widget.Button;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    DatabaseHelper myDB;
+    static DatabaseHelper myDB;
     Calendar date;
     Button btSettings;
     private AlarmManagement alarm;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         alarm = new AlarmManagement();
         btSettings = (Button) findViewById(R.id.btSettings);
         myDB = new DatabaseHelper(this);
+        myDB.open();
 
         btSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +62,11 @@ public class MainActivity extends AppCompatActivity {
                         date.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         date.set(Calendar.MINUTE, minute);
                         Log.v(TAG, date.toString());
-                        addData(date.toString());
+                        long  millis=date.getTimeInMillis();
+                        addData(Objects.toString(millis,null));
+
+                        //SettingsActivity.startTimer(millis);
+                        reloadActivity();
 
                     }
                 }, currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
@@ -72,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+    public void reloadActivity() {
+        finish();
+        startActivity(getIntent());
+    }
+
     public void addData(String newEntry) {
         boolean insertData = myDB.addData(newEntry);
         if (insertData)
@@ -80,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, getResources().getText(R.string.toast_error), Toast.LENGTH_LONG).show();
 
     }
+
 }
 
 
