@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WUMF</string>
+    <string name="app_name">Alarm app</string>
     <string name="btStart">Start</string>
     <string name="btCancel">Окончить тест</string>
     <string name="btOneTime">One Time</string>

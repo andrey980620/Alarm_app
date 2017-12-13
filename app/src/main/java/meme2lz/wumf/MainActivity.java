@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         alarm = new AlarmManagement();
-        btSettings=(Button) findViewById(R.id.btSettings);
-        myDB =new DatabaseHelper(this);
+        btSettings = (Button) findViewById(R.id.btSettings);
+        myDB = new DatabaseHelper(this);
 
         btSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
     }
-
 
 
     public void showDateTimePicker(View view) {
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                         date.set(Calendar.MINUTE, minute);
                         Log.v(TAG, date.toString());
                         addData(date.toString());
-                        //Toast.makeText(context, "Set on" + date.getTime().toString(), Toast.LENGTH_LONG).show();
 
                     }
                 }, currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
@@ -77,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
     public void addData(String newEntry) {
         boolean insertData = myDB.addData(newEntry);
         if (insertData)
-            Toast.makeText(MainActivity.this, R.string.toast_dbAdded + date.getTime().toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, getResources().getText(R.string.toast_dbAdded) + date.getTime().toString(), Toast.LENGTH_LONG).show();
         else
-            Toast.makeText(MainActivity.this, R.string.toast_error, Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, getResources().getText(R.string.toast_error), Toast.LENGTH_LONG).show();
 
     }
 }

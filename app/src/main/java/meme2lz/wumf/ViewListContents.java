@@ -1,4 +1,5 @@
 package meme2lz.wumf;
+
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,7 @@ public class ViewListContents extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Log.v("LIST VIEW","WOAH, onCreate accessed");
+        Log.v("LIST VIEW", "WOAH, onCreate accessed");
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
 
@@ -39,6 +40,6 @@ public class ViewListContents extends AppCompatActivity {
                 listView.setAdapter(listAdapter);
             }
         }
-        Log.v("Current array",theList.toString());
+        Log.v("Current array", theList.toString());
     }
 }
