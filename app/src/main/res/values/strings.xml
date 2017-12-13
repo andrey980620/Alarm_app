@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">WUMF</string>
     <string name="btStart">Start</string>
-    <string name="btCancel">Cancel</string>
+    <string name="btCancel">STOP QUICK TEST</string>
     <string name="btOneTime">One Time</string>
     <string name="btQTest">QUICK TEST</string>
     <string name="btSettings">SETTINGS</string>
     <string name="btADD">ADD</string>
     <string name="txAlarmList">List of set alarms</string>
+    <string name="toast_dbAdded">Successfully added to db: </string>
+    <string name="toast_error">Sorry, something went wrong.</string>
 </resources>

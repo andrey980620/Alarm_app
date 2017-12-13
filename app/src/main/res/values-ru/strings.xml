@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WUMF</string>
+    <string name="btStart">Start</string>
+    <string name="btCancel">Окончить тест</string>
+    <string name="btOneTime">One Time</string>
+    <string name="btQTest">Начать тест</string>
+    <string name="btSettings">НАСТРОЙКИ</string>
+    <string name="btADD">ДОБАВИТЬ</string>
+    <string name="txAlarmList">Список установленных</string>
+    <string name="toast_dbAdded">Успешно добавлено в базу данных: </string>
+    <string name="toast_error">Извините, произошла ошибка.</string>
+</resources>

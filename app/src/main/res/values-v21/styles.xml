@@ -3,9 +3,9 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#6b0008</item>
-        <item name="colorPrimaryDark">#3F050D</item>
-        <item name="colorAccent">#FF989E</item>
+        <item name="colorPrimary">#5D7183</item>
+        <item name="colorPrimaryDark">#4D6173</item>
+        <item name="colorAccent">#E9A568</item>
         <item name="android:navigationBarColor">?attr/colorPrimaryDark</item>
         <item name="android:windowBackground">@android:color/background_dark</item>
         <item name="android:colorBackground">?attr/colorPrimary</item>
